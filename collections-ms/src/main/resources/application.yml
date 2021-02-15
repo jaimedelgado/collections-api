@@ -1,0 +1,24 @@
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+server:
+  port: 8080
+
+
+collections:
+  libs:
+    client:
+      mock: false
+
+unsplash:
+  client_id: N1ZPgGhg0x217tyfYOWQqqDbx8oplBOYSZuX_VHaEMk
+  host: "api.unsplash.com"
+  collections:
+    path: "collections"
+
+spring:
+  security:
+    user:
+      name: vivelibre
+      password: v1v3l1br3

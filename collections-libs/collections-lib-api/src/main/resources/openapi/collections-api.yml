@@ -1,0 +1,138 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Collections API
+  description:  This API get collections from unsplash API
+  contact:
+    name: Jaime Delgado
+    url: https://www.linkedin.com/in/jaimedelgado1
+    email: jaimedl92@gmail.com
+  license:
+    name: GNU General Public License v3.0
+servers:
+  - url: http://localhost:8080/v1
+
+paths:
+  /collections:
+    get:
+      summary: List all collections
+      operationId: listCollections
+      parameters:
+        - name: id
+          in: query
+          description: Collection id to search
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: title
+          in: query
+          description: Collection title to search
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: description
+          in: query
+          description: Collection description to search
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: coverPhotoId
+          in: query
+          description: Collection cover photo id to search
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: A paged array of collections
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collections"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Messages"
+
+  /collections/all:
+    get:
+      summary: List all collections (Deprecated)
+      operationId: listCollectionsByFilter
+      parameters:
+        - name: filter
+          in: query
+          description: Filter to apply
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A paged array of collections
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collections"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Messages"
+
+components:
+  schemas:
+    Collection:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - coverPhotoId
+      properties:
+        id:
+          type: string
+          example: "292"
+        title:
+          type: string
+          example: "I like a man with a beard."
+        description:
+          type: string
+          example: "Yeah even Santa..."
+        coverPhotoId:
+          type: string
+          example: "C-mxLOk6ANs"
+
+    Collections:
+      type: array
+      items:
+        $ref: "#/components/schemas/Collection"
+    Messages:
+      type: array
+      items:
+        $ref: "#/components/schemas/Message"
+    Message:
+      type: object
+      required:
+        - type
+        - alias
+        - description
+      properties:
+        type:
+          type: string
+          example: ERROR
+        alias:
+          type: string
+          example: unaothorized
+        description:
+          type: string
+          example: "Error calling third service. Contact support"
