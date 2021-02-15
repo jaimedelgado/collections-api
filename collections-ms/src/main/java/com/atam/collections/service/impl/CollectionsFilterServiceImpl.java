@@ -5,10 +5,12 @@ import com.atam.collections.libs.client.dto.response.CollectionsResponseDTO;
 import com.atam.collections.service.CollectionsFilterService;
 import com.atam.collections.service.mapper.CollectionsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class CollectionsFilterServiceImpl implements CollectionsFilterService {
 
     @Autowired
@@ -38,16 +40,20 @@ public class CollectionsFilterServiceImpl implements CollectionsFilterService {
     }
 
     private boolean filter(CollectionDTO collection, String filter) {
-        String[] split = filter.split(" ");
-        String field = split[0].toLowerCase();
-        String fieldToMatch = "";
-        switch(field){
-            case "id": fieldToMatch = collection.getId(); break;
-            case "title": fieldToMatch = collection.getTitle(); break;
-            case "description": fieldToMatch = collection.getDescription(); break;
-            case "cover_photo_id": fieldToMatch = collection.getCoverPhotoId(); break;
+        boolean match = true;
+        if (filter != null && !filter.isEmpty()){
+            String[] split = filter.split(" ");
+            String field = split[0].toLowerCase();
+            String fieldToMatch = "";
+            switch(field){
+                case "id": fieldToMatch = collection.getId(); break;
+                case "title": fieldToMatch = collection.getTitle(); break;
+                case "description": fieldToMatch = collection.getDescription(); break;
+                case "cover_photo_id": fieldToMatch = collection.getCoverPhotoId(); break;
+            }
+            match = fieldToMatch.contains(split[2]);
         }
-        return fieldToMatch.contains(split[2]);
+        return match;
     }
 
     public boolean filter(String field, List<String> ids) {
