@@ -30,29 +30,25 @@ Parámetros:
 
 Existen las operaciones de filtrado OR (usando '&': id=35&id=36), igualdad (=) y contiene (=~ : id=~89) .
 
+---
+
 #### Tecnologías
 
 Apache Maven 3.6.3
 
 Java 11
 
-#### Cómo compilar el microservicio en local
-
-Para construir el proyecto se utilizar�n los siguientes comandos:
-
-> mvn clean install
-
-Este comando ejecuta:
-1. Limpiar el target del proyecto.
-2. Recoger las librerías necesarias para el microservicio.
-3. Compilar el proyecto
-
 ---
 
-#### Cómo ejecutar el microservicio en local
-Siguiendo los pasos anteriores, bastarÍa con ejecutar el comando en la carpeta raÍz del MS:
+#### Integración con docker
 
-> mvn spring-boot:run
+Se ha generado la imagen jaimedelgadolinares/collections-api:latest en dockerhub y se ha sincronizado con la rama develop del repositorio
+Github para que siempre que se haga un push se actualice la imagen.
+
+Para probarla sólo hay que ejecutar:
+> docker pull jaimedelgadolinares/collections-api:latest
+
+> docker run -p 8080:8080 jaimedelgadolinares/collections-api
 
 ---
 
