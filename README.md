@@ -7,7 +7,7 @@ podrán realizar demasiadas peticiones. Se ha puesto autenticación básica con 
 En un futuro se debería solicitar el token oauth2 a unsplash.
 
 En cuanto al api, se quería realizar el siguiente endpoint:
-> GET /collections/all  (Deprecado)
+> GET /v1/collections/all  (Deprecado)
 
 Parámetros:
 > filter: Filtro aplicado. (Optional; default: null) Ejemplo: id like 9897. Siempre hace un contains.
@@ -17,7 +17,7 @@ sin tener que saber cómo funciona ya que sigue las buenas prácticas reflejadas
 Se recomienda también leer https://www.w3.org/Provider/Style/URI.html.en.
 
 El endpoint quedaría de la siguiente forma:
-> GET **/collections**
+> GET **/v1/collections**
 
 Parámetros:
 > **id**: String (Optional; default: null)
